@@ -13,10 +13,10 @@ def buildInfo
 pipeline {
     agent any
 
-	tools {
+	//tools {
 		//jdk "Java-1.8"
 		//maven "Maven-3.5.3"
-	}
+	//}
 
     stages {
         stage('Clone sources'){
