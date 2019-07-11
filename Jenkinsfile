@@ -70,8 +70,8 @@ pipeline {
 	stage('Execute Maven') {
 		steps {
 		   script {
-		
-		rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
+		echo 'Execute Maven will build the pom.xml which is there in source code repository'
+		//rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
 			}
 		}
 		
@@ -80,8 +80,8 @@ pipeline {
 	stage('Publish build info') {
 		steps {
 		  script {
-
-		server.publishBuildInfo buildInfo
+		echo 'Publish the artefacts in Artefactory'
+		//server.publishBuildInfo buildInfo
 		}
 		}
 	}
