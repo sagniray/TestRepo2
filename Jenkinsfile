@@ -58,8 +58,7 @@ pipeline {
 	   steps {
 		script {
 			rtMaven.tool = 'Maven-3.5.3' //Maven tool name specified in Jenkins configuration
-		
-			sh
+			echo 'The artefacts beuilt in Build stage are pushed to Nexus/ Artefactory repo'
 			}
 	    }
 	}
@@ -69,7 +68,7 @@ pipeline {
 	stage('Deploy') {
 		steps {
 		  script {
-		echo 'Publish the artefacts in Artefactory'
+		echo 'Publish the artifacts in Release repo of Artifactory'
 		//server.publishBuildInfo buildInfo
 		}
 		}
