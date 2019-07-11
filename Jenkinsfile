@@ -28,7 +28,7 @@ pipeline {
      	stage('SonarQube analysis') {
 	     steps {
 		//Prepare SonarQube scanner enviornment
-		//sh("echo 'SonarQubeAnalysis'")
+		echo 'SonarQubeAnalysis will be done here'
 		
 	      }
 	}
