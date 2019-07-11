@@ -19,7 +19,7 @@ pipeline {
 	}
 
     stages {
-        stage('Clone sources'){
+        stage('Git Checkout'){
             steps {
                 git url: 'https://github.com/priya1233/testPipelineSrcCode.git'
             }
@@ -44,30 +44,7 @@ pipeline {
 //		 }
 //	}
 
-	stage('Artifactory configuration') {
-		
-	   steps {
-		script {
-			rtMaven.tool = 'Maven-3.5.3' //Maven tool name specified in Jenkins configuration
-		
-			rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server //Defining where the build artifacts should be deployed to
-			
-			rtMaven.resolver releaseRepo:'libs-release', snapshotRepo: 'libs-snapshot', server: server //Defining where Maven Build should download its dependencies from
-			
-			rtMaven.deployer.artifactDeploymentPatterns.addExclude("pom.xml") //Exclude artifacts from being deployed
-			
-			//rtMaven.deployer.deployArtifacts =false // Disable artifacts deployment during Maven run
-		    
-			buildInfo = Artifactory.newBuildInfo() //Publishing build-Info to artifactory
-			
-			buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
-
-			buildInfo.env.capture = true
-			}
-	    }
-	}
-
-	stage('Execute Maven') {
+	    stage('Build') {
 		steps {
 		   script {
 		echo 'Execute Maven will build the pom.xml which is there in source code repository'
@@ -76,8 +53,20 @@ pipeline {
 		}
 		
 	}
+	stage('Staging') {
+		
+	   steps {
+		script {
+			rtMaven.tool = 'Maven-3.5.3' //Maven tool name specified in Jenkins configuration
+		
+			sh
+			}
+	    }
+	}
 
-	stage('Publish build info') {
+	
+
+	stage('Deploy') {
 		steps {
 		  script {
 		echo 'Publish the artefacts in Artefactory'
