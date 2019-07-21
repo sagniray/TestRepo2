@@ -21,7 +21,7 @@ pipeline {
     stages {
         stage('Git Checkout'){
             steps {
-                git url: 'https://github.com/priya1233/testPipelineSrcCode.git'
+                git url: 'https://github.com/sagniray/TestRepo2.git'
             }
         }
 
